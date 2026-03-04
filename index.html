@@ -135,7 +135,7 @@
     document.getElementById('updateTime').textContent='正在获取...';
 
     try {
-      const proxy=`https://api.allorigins.win/raw?url=${encodeURIComponent(API_URL)}`;
+      const proxy=`https://corsproxy.io/?${encodeURIComponent(API_URL)}`;
       const res=await fetch(proxy);
       if(!res.ok) throw new Error(`HTTP ${res.status}`);
       const text=await res.text();
