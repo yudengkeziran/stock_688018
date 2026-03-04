@@ -8,44 +8,25 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f1117;
-      color: #e2e8f0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #0f1117; color: #e2e8f0;
+      min-height: 100vh; display: flex;
+      align-items: center; justify-content: center;
     }
     .card {
-      background: #1a1d2e;
-      border: 1px solid #2d3148;
-      border-radius: 16px;
-      padding: 32px 40px;
-      width: 420px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      background: #1a1d2e; border: 1px solid #2d3148;
+      border-radius: 16px; padding: 32px 40px;
+      width: 420px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .stock-code { font-size: 13px; color: #64748b; letter-spacing: 1px; }
-    .exchange-badge {
-      background: #1e3a5f; color: #60a5fa;
-      font-size: 11px; padding: 3px 8px;
-      border-radius: 20px; font-weight: 600;
-    }
+    .exchange-badge { background: #1e3a5f; color: #60a5fa; font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 600; }
     .stock-name { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; }
     .price-row { display: flex; align-items: flex-end; gap: 16px; margin-bottom: 8px; }
     .price { font-size: 48px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
-    .price.up   { color: #ef4444; }
-    .price.down { color: #22c55e; }
-    .price.flat { color: #94a3b8; }
+    .price.up { color: #ef4444; } .price.down { color: #22c55e; } .price.flat { color: #94a3b8; }
     .change-box { display: flex; flex-direction: column; gap: 4px; padding-bottom: 4px; }
     .change-abs, .change-pct { font-size: 14px; font-weight: 600; }
-    .up-text   { color: #ef4444; }
-    .down-text { color: #22c55e; }
-    .flat-text { color: #94a3b8; }
+    .up-text { color: #ef4444; } .down-text { color: #22c55e; } .flat-text { color: #94a3b8; }
     .divider { border: none; border-top: 1px solid #2d3148; margin: 20px 0; }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .stat { background: #0f1117; border-radius: 10px; padding: 12px 14px; }
@@ -53,27 +34,14 @@
     .stat-value { font-size: 15px; font-weight: 600; color: #e2e8f0; }
     .footer { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; }
     .update-time { font-size: 11px; color: #475569; }
-    .refresh-btn {
-      background: #2563eb; color: white; border: none;
-      border-radius: 8px; padding: 7px 16px;
-      font-size: 12px; font-weight: 600; cursor: pointer;
-    }
+    .refresh-btn { background: #2563eb; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-size: 12px; font-weight: 600; cursor: pointer; }
     .refresh-btn:hover { background: #1d4ed8; }
     .refresh-btn:disabled { background: #334155; color: #64748b; cursor: not-allowed; }
-    .status-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: #22c55e; display: inline-block;
-      margin-right: 6px; animation: pulse 2s infinite;
-    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; display: inline-block; margin-right: 6px; animation: pulse 2s infinite; }
     .status-dot.loading { background: #f59e0b; animation: none; }
-    .status-dot.error   { background: #ef4444; animation: none; }
+    .status-dot.error { background: #ef4444; animation: none; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-    .error-msg {
-      background: #2d1515; border: 1px solid #7f1d1d;
-      border-radius: 10px; padding: 14px;
-      font-size: 13px; color: #fca5a5;
-      margin-top: 16px; line-height: 1.6;
-    }
+    .error-msg { background: #2d1515; border: 1px solid #7f1d1d; border-radius: 10px; padding: 14px; font-size: 13px; color: #fca5a5; margin-top: 16px; line-height: 1.6; white-space: pre-wrap; }
   </style>
 </head>
 <body>
@@ -82,8 +50,7 @@
     <span class="stock-code">688018</span>
     <span class="exchange-badge">科创板 · SSE</span>
   </div>
-  <div class="stock-name" id="stockName">加载中...</div>
-
+  <div class="stock-name" id="stockName">联影医疗</div>
   <div class="price-row">
     <div class="price flat" id="price">--</div>
     <div class="change-box">
@@ -91,9 +58,7 @@
       <span class="change-pct flat-text" id="changePct">--</span>
     </div>
   </div>
-
   <hr class="divider"/>
-
   <div class="grid">
     <div class="stat"><div class="stat-label">今开</div><div class="stat-value" id="open">--</div></div>
     <div class="stat"><div class="stat-label">昨收</div><div class="stat-value" id="preClose">--</div></div>
@@ -102,9 +67,7 @@
     <div class="stat"><div class="stat-label">成交量</div><div class="stat-value" id="volume">--</div></div>
     <div class="stat"><div class="stat-label">成交额</div><div class="stat-value" id="amount">--</div></div>
   </div>
-
   <div id="errorMsg" style="display:none" class="error-msg"></div>
-
   <div class="footer">
     <span class="update-time">
       <span class="status-dot loading" id="statusDot"></span>
@@ -115,67 +78,87 @@
 </div>
 
 <script>
-  const API_URL = 'https://hq.sinajs.cn/list=sh688018';
+  const SINA_URL = 'https://hq.sinajs.cn/list=sh688018';
+
+  // 多个 CORS 代理，依次尝试
+  const PROXIES = [
+    u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+    u => `https://thingproxy.freeboard.io/fetch/${u}`,
+    u => `https://proxy.cors.sh/${u}`,
+  ];
 
   function fmt(num, d=2) { const n=parseFloat(num); return isNaN(n)?'--':n.toFixed(d); }
-  function fmtVol(v) {
-    const n=parseInt(v); if(isNaN(n)) return '--';
-    return n>=10000 ? (n/10000).toFixed(2)+' 万手' : n+' 手';
+  function fmtVol(v) { const n=parseInt(v); if(isNaN(n))return'--'; return n>=10000?(n/10000).toFixed(2)+' 万手':n+' 手'; }
+  function fmtAmt(v) { const n=parseFloat(v); if(isNaN(n))return'--'; return n>=100000000?(n/100000000).toFixed(2)+' 亿':(n/10000).toFixed(2)+' 万'; }
+
+  function parseAndRender(text) {
+    const match = text.match(/"([^"]+)"/);
+    if (!match) throw new Error('数据格式异常');
+    const f = match[1].split(',');
+    if (f.length < 10 || !f[0]) throw new Error('暂无数据（非交易时间）');
+
+    const price = parseFloat(f[3]), preClose = parseFloat(f[2]);
+    const change = price - preClose, pct = (change / preClose) * 100;
+    const dir = change > 0 ? 'up' : change < 0 ? 'down' : 'flat';
+    const sign = change > 0 ? '+' : '';
+
+    document.getElementById('stockName').textContent  = f[0];
+    document.getElementById('price').textContent      = fmt(price);
+    document.getElementById('price').className        = `price ${dir}`;
+    document.getElementById('changeAbs').textContent  = `${sign}${fmt(change)}`;
+    document.getElementById('changeAbs').className    = `change-abs ${dir}-text`;
+    document.getElementById('changePct').textContent  = `${sign}${fmt(pct)}%`;
+    document.getElementById('changePct').className    = `change-pct ${dir}-text`;
+    document.getElementById('open').textContent       = fmt(f[1]);
+    document.getElementById('preClose').textContent   = fmt(f[2]);
+    document.getElementById('high').textContent       = fmt(f[4]);
+    document.getElementById('low').textContent        = fmt(f[5]);
+    document.getElementById('volume').textContent     = fmtVol(f[8]);
+    document.getElementById('amount').textContent     = fmtAmt(f[9]);
   }
-  function fmtAmt(v) {
-    const n=parseFloat(v); if(isNaN(n)) return '--';
-    return n>=100000000 ? (n/100000000).toFixed(2)+' 亿' : (n/10000).toFixed(2)+' 万';
+
+  async function tryProxy(proxyFn) {
+    const url = proxyFn(SINA_URL);
+    const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    parseAndRender(text);
   }
 
   async function fetchStock() {
-    const btn=document.getElementById('refreshBtn');
-    const dot=document.getElementById('statusDot');
-    const errBox=document.getElementById('errorMsg');
-    btn.disabled=true; dot.className='status-dot loading'; errBox.style.display='none';
-    document.getElementById('updateTime').textContent='正在获取...';
+    const btn = document.getElementById('refreshBtn');
+    const dot = document.getElementById('statusDot');
+    const errBox = document.getElementById('errorMsg');
+    btn.disabled = true;
+    dot.className = 'status-dot loading';
+    errBox.style.display = 'none';
+    document.getElementById('updateTime').textContent = '正在获取...';
 
-    try {
-      const proxy=`https://corsproxy.io/?${encodeURIComponent(API_URL)}`;
-      const res=await fetch(proxy);
-      if(!res.ok) throw new Error(`HTTP ${res.status}`);
-      const text=await res.text();
-      const match=text.match(/"([^"]+)"/);
-      if(!match) throw new Error('数据格式异常');
-      const f=match[1].split(',');
-      if(f.length<10 || !f[0]) throw new Error('暂无数据（可能为非交易时间）');
+    let lastErr = null;
+    for (let i = 0; i < PROXIES.length; i++) {
+      try {
+        document.getElementById('updateTime').textContent = `尝试代理 ${i+1}/${PROXIES.length}...`;
+        await tryProxy(PROXIES[i]);
+        dot.className = 'status-dot';
+        document.getElementById('updateTime').textContent = '更新于 ' + new Date().toLocaleTimeString('zh-CN');
+        btn.disabled = false;
+        return; // 成功则退出
+      } catch(e) {
+        lastErr = e;
+      }
+    }
 
-      const price=parseFloat(f[3]), preClose=parseFloat(f[2]);
-      const change=price-preClose, pct=(change/preClose)*100;
-      const dir=change>0?'up':change<0?'down':'flat';
-      const sign=change>0?'+':'';
-
-      document.getElementById('stockName').textContent = f[0];
-      document.getElementById('price').textContent     = fmt(price);
-      document.getElementById('price').className       = `price ${dir}`;
-      document.getElementById('changeAbs').textContent = `${sign}${fmt(change)}`;
-      document.getElementById('changeAbs').className   = `change-abs ${dir}-text`;
-      document.getElementById('changePct').textContent = `${sign}${fmt(pct)}%`;
-      document.getElementById('changePct').className   = `change-pct ${dir}-text`;
-      document.getElementById('open').textContent      = fmt(f[1]);
-      document.getElementById('preClose').textContent  = fmt(f[2]);
-      document.getElementById('high').textContent      = fmt(f[4]);
-      document.getElementById('low').textContent       = fmt(f[5]);
-      document.getElementById('volume').textContent    = fmtVol(f[8]);
-      document.getElementById('amount').textContent    = fmtAmt(f[9]);
-
-      dot.className='status-dot';
-      document.getElementById('updateTime').textContent=
-        '更新于 '+new Date().toLocaleTimeString('zh-CN');
-    } catch(e) {
-      dot.className='status-dot error';
-      document.getElementById('updateTime').textContent='获取失败';
-      errBox.style.display='block';
-      errBox.textContent=`⚠️ ${e.message}\n提示：非交易时间数据为空属正常现象。`;
-    } finally { btn.disabled=false; }
+    // 全部失败
+    dot.className = 'status-dot error';
+    document.getElementById('updateTime').textContent = '获取失败';
+    errBox.style.display = 'block';
+    errBox.textContent = `⚠️ 所有代理均失败：${lastErr?.message}\n\n可能原因：\n1. 当前网络环境限制了外部请求\n2. 非交易时间新浪接口返回空数据\n\n请在交易时间（工作日 9:30–15:00）刷新重试。`;
+    btn.disabled = false;
   }
 
   fetchStock();
-  setInterval(fetchStock, 60000); // 每60秒自动刷新
+  setInterval(fetchStock, 60000);
 </script>
 </body>
 </html>
