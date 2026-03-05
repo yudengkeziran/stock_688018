@@ -347,6 +347,7 @@ function bossShoot(){
 
 // ===== PARTICLES =====
 function spawnParticles(x,y,color,count=10,spd=4,big=false){
+  if(particles.length>600) return;
   for(let i=0;i<count;i++){
     let a=Math.random()*Math.PI*2;
     let s=Math.random()*spd+1;
@@ -363,16 +364,16 @@ function spawnParticles(x,y,color,count=10,spd=4,big=false){
 }
 
 function spawnExplosion(x,y,color,size=1){
+  if(particles.length>600) return;
   screenShake=Math.max(screenShake,8*size);
-  for(let i=0;i<30*size;i++){
+  let count=Math.min(Math.floor(15*size),20);
+  for(let i=0;i<count;i++){
     let a=Math.random()*Math.PI*2;
     let s=Math.random()*8*size+2;
-    particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,r:Math.random()*6*size+2,color,life:Math.random()*40+30,maxLife:70,type:'explosion'});
+    particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,r:Math.random()*5*size+1.5,color,life:Math.random()*35+20,maxLife:55,type:'explosion'});
   }
-  // Shockwave ring
-  particles.push({x,y,r:5,maxR:80*size,color,life:30,maxLife:30,type:'ring'});
-  // Flash
-  particles.push({x,y,r:40*size,color:'#fff',life:8,maxLife:8,type:'flash'});
+  particles.push({x,y,r:5,maxR:70*size,color,life:25,maxLife:25,type:'ring'});
+  particles.push({x,y,r:35*size,color:'#fff',life:7,maxLife:7,type:'flash'});
 }
 
 function spawnLightning(x1,y1,x2,y2,color='#0af',width=2){
@@ -440,9 +441,11 @@ function killEnemy(e){
   score+=e.score*(combo>5?2:1);
   combo++;comboTimer=120;
   superCharge=Math.min(superMax,superCharge+(e.type==='bonus'?8:5));
-  spawnExplosion(e.x,e.y,e.color,e.size/30);
+  // Cap explosion size to avoid particle explosion
+  let expSize=Math.min(e.size/30, 1.5);
+  spawnExplosion(e.x,e.y,e.color,expSize);
   if(Math.random()<(e.type==='bonus'?0.8:0.25)) spawnPickup(e.x,e.y,['hp','shield','charge','power'][Math.floor(Math.random()*4)]);
-  updateHUD();
+  // Don't call updateHUD here - it's called in the main loop
 }
 
 // ===== UPDATE =====
@@ -501,17 +504,19 @@ function update(){
     if(b.x<-20||b.x>W+20||b.y<-20||b.y>H+20||b.life<=0) return false;
     // Hit enemies
     let hit=false;
-    enemies.forEach(e=>{
-      if(!e.alive) return;
-      if(frame<e.spawnTime) return;
+    for(let ei=0;ei<enemies.length;ei++){
+      let e=enemies[ei];
+      if(!e.alive) continue;
+      if(frame<e.spawnTime) continue;
       if(rectCircle(e.x,e.y,e.size,e.size,b.x,b.y,b.w||5)){
         e.hp-=b.dmg;e.hitFlash=5;
         spawnParticles(b.x,b.y,b.color,4,3);
         if(b.type==='laser') spawnLightning(b.x,b.y,e.x,e.y,b.color,1);
         if(e.hp<=0) killEnemy(e);
         hit=true;
+        break; // one bullet hits one enemy
       }
-    });
+    }
     if(boss&&boss.alive){
       if(rectCircle(boss.x,boss.y,boss.size,boss.size,b.x,b.y,b.w||5)){
         boss.hp-=b.dmg;boss.hitFlash=5;
@@ -706,7 +711,7 @@ function update(){
     if(alive===0){bonusActive=false;announceStage('BONUS END!');}
   }
 
-  updateHUD();
+  if(frame%6===0) updateHUD();
 }
 
 function playerHit(dmg){
